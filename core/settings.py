@@ -3,7 +3,7 @@
 
 # BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = 'django-insecure-prototype-key-change-in-production'
+# SECRET_KEY = 'django-insecure-#a1b2c3d4e5f6g7h8i9j0k-lmnopqrstuvwxyz12345678'
 # DEBUG = True
 # ALLOWED_HOSTS = []
 
@@ -54,6 +54,8 @@
 #     }
 # }
 
+# AUTH_USER_MODEL = 'marketplace.User'
+
 # AUTH_PASSWORD_VALIDATORS = [
 #     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
 #     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -70,79 +72,44 @@
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# # Extend user model with a role field (using a simple profile)
-# AUTH_USER_MODEL = 'marketplace.User'
 
 import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-#a1b2c3d4e5f6g7h8i9j0k-lmnopqrstuvwxyz12345678'
-DEBUG = True
-ALLOWED_HOSTS = []
+# Change this to a strong random string - keep it secret!
+SECRET_KEY = 'asd123ASD_'
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'marketplace',
-]
+# IMPORTANT: Set DEBUG to False for production
+DEBUG = False
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+# Add your PythonAnywhere domain to ALLOWED_HOSTS
+ALLOWED_HOSTS = ['cybergate.pythonanywhere.com', 'www.cybergate.pythonanywhere.com']
 
-ROOT_URLCONF = 'core.urls'
+# ... (keep the rest of INSTALLED_APPS, MIDDLEWARE, etc. as before)
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-WSGI_APPLICATION = 'core.wsgi.application'
-
+# Update the database to use MySQL (PythonAnywhere provides MySQL)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cybergate$default',  # PythonAnywhere database naming convention
+        'USER': 'cybergate',
+        'PASSWORD': 'asd123ASD_',
+        'HOST': 'cybergate.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
-AUTH_USER_MODEL = 'marketplace.User'
+# Static files configuration
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-]
-
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
-
-STATIC_URL = 'static/'
+# Media files configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Security settings for production
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False  # PythonAnywhere handles SSL differently
