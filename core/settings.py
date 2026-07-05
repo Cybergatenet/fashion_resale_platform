@@ -73,6 +73,48 @@
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# import os
+# from pathlib import Path
+
+# BASE_DIR = Path(__file__).resolve().parent.parent
+
+# # Change this to a strong random string - keep it secret!
+# SECRET_KEY = 'asd123ASD_'
+
+# # IMPORTANT: Set DEBUG to False for production
+# DEBUG = False
+
+# # Add your PythonAnywhere domain to ALLOWED_HOSTS
+# ALLOWED_HOSTS = ['cybergate.pythonanywhere.com', 'www.cybergate.pythonanywhere.com']
+
+# # ... (keep the rest of INSTALLED_APPS, MIDDLEWARE, etc. as before)
+
+# # Update the database to use MySQL (PythonAnywhere provides MySQL)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'cybergate$default',  # PythonAnywhere database naming convention
+#         'USER': 'cybergate',
+#         'PASSWORD': 'asd123ASD_',
+#         'HOST': 'cybergate.mysql.pythonanywhere-services.com',
+#         'PORT': '3306',
+#     }
+# }
+
+# # Static files configuration
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# # Media files configuration
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# # Security settings for production
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = False  # PythonAnywhere handles SSL differently
+
+
 import os
 from pathlib import Path
 
@@ -85,19 +127,15 @@ SECRET_KEY = 'asd123ASD_'
 DEBUG = False
 
 # Add your PythonAnywhere domain to ALLOWED_HOSTS
-ALLOWED_HOSTS = ['cybergate.pythonanywhere.com', 'www.cybergate.pythonanywhere.com']
+ALLOWED_HOSTS = ['cybergate.pythonanywhere.com', 'localhost', '127.0.0.1']
 
-# ... (keep the rest of INSTALLED_APPS, MIDDLEWARE, etc. as before)
+# Keep the rest of INSTALLED_APPS, MIDDLEWARE, etc. as before
 
-# Update the database to use MySQL (PythonAnywhere provides MySQL)
+# Use SQLite database (free and works perfectly on PythonAnywhere)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cybergate$default',  # PythonAnywhere database naming convention
-        'USER': 'cybergate',
-        'PASSWORD': 'asd123ASD_',
-        'HOST': 'cybergate.mysql.pythonanywhere-services.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -112,4 +150,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Security settings for production
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = False  # PythonAnywhere handles SSL differently
