@@ -1,0 +1,20 @@
+{% extends 'marketplace/base.html' %}
+{% block content %}
+<h2 class="text-2xl mb-4">My Products</h2>
+<a href="{% url 'product_add' %}" class="bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block">Add Product</a>
+<table class="w-full bg-white shadow rounded">
+    <thead><tr><th>Image</th><th>Title</th><th>Grade</th><th>Price</th><th>Stock</th><th></th></tr></thead>
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td>{% if product.image %}<img src="{{ product.image.url }}" width="50">{% endif %}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.condition_grade }}</td>
+        <td>${{ product.unit_price }}</td>
+        <td>{{ product.quantity }}</td>
+        <td><a href="{% url 'product_edit' product.pk %}">Edit</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

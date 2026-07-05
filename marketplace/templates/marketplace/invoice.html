@@ -1,0 +1,83 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2cm; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1cm; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        .header { text-align: center; font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">COMMERCIAL INVOICE</div>
+    <p>Invoice No: INV-{{ order.order_date|date:'Ymd' }}-{{ order.pk|stringformat:'06d' }}</p>
+    <p>Date: {{ order.order_date|date:'Y-m-d' }}</p>
+    <p>Order Ref: {{ order.order_reference }}</p>
+    <div>
+        <p><strong>Supplier:</strong><br>
+        {{ order.supplier.business_name }}<br>
+        {{ order.supplier.business_address }}<br>
+        {{ order.supplier.country }}</p>
+    </div>
+    <div>
+        <p><strong>Buyer:</strong><br>
+        {{ order.buyer.business_name }}<br>
+        {{ order.buyer.shipping_address }}<br>
+        {{ order.buyer.country }}</p>
+    </div>
+    <table>
+        <tr><th>Description</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.product.title }} ({{ item.product.get_condition_grade_display }})</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.unit_price }}</td>
+            <td>${{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p style="text-align: right; margin-top: 20px;">Total: ${{ order.total_amount }}</p>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2cm; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1cm; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        .header { text-align: center; font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">COMMERCIAL INVOICE</div>
+    <p>Invoice No: INV-{{ order.order_date|date:'Ymd' }}-{{ order.pk|stringformat:'06d' }}</p>
+    <p>Date: {{ order.order_date|date:'Y-m-d' }}</p>
+    <p>Order Ref: {{ order.order_reference }}</p>
+    <div>
+        <p><strong>Supplier:</strong><br>
+        {{ order.supplier.business_name }}<br>
+        {{ order.supplier.business_address }}<br>
+        {{ order.supplier.country }}</p>
+    </div>
+    <div>
+        <p><strong>Buyer:</strong><br>
+        {{ order.buyer.business_name }}<br>
+        {{ order.buyer.shipping_address }}<br>
+        {{ order.buyer.country }}</p>
+    </div>
+    <table>
+        <tr><th>Description</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.product.title }} ({{ item.product.get_condition_grade_display }})</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.unit_price }}</td>
+            <td>${{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p style="text-align: right; margin-top: 20px;">Total: ${{ order.total_amount }}</p>
+</body>
+</html>

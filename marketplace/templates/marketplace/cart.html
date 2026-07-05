@@ -1,0 +1,53 @@
+<!-- {% extends 'marketplace/base.html' %}
+{% block content %}
+<h2 class="text-2xl mb-4">Your Cart</h2>
+{% if items %}
+<table class="w-full bg-white shadow rounded">
+    <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead>
+    <tbody>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.title }}</td>
+        <td>${{ item.product.unit_price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.product.unit_price * item.quantity }}</td>
+        <td><a href="{% url 'remove_from_cart' item.pk %}">Remove</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="text-right mt-4">
+    <strong>Total: ${{ total }}</strong>
+    <a href="{% url 'checkout' %}" class="bg-blue-600 text-white px-4 py-2 rounded ml-2">Checkout</a>
+</div>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %} -->
+
+{% extends 'marketplace/base.html' %}
+{% block content %}
+<h2 class="text-2xl mb-4">Your Cart</h2>
+{% if items %}
+<table class="w-full bg-white shadow rounded">
+    <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead>
+    <tbody>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.cart_item.product.title }}</td>
+        <td>${{ item.cart_item.product.unit_price }}</td>
+        <td>{{ item.cart_item.quantity }}</td>
+        <td>${{ item.subtotal }}</td>
+        <td><a href="{% url 'remove_from_cart' item.cart_item.pk %}">Remove</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="text-right mt-4">
+    <strong>Total: ${{ total }}</strong>
+    <a href="{% url 'checkout' %}" class="bg-blue-600 text-white px-4 py-2 rounded ml-2">Checkout</a>
+</div>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

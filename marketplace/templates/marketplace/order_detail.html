@@ -1,0 +1,29 @@
+{% extends 'marketplace/base.html' %}
+{% block content %}
+<h2 class="text-2xl mb-4">Order {{ order.order_reference }}</h2>
+<p>Status: {{ order.status }}</p>
+<p>Date: {{ order.order_date }}</p>
+<p>Total: ${{ order.total_amount }}</p>
+<h3 class="text-xl mt-4">Items</h3>
+<ul>
+{% for item in order.items.all %}
+    <li>{{ item.product.title }} x {{ item.quantity }} @ ${{ item.unit_price }}</li>
+{% endfor %}
+</ul>
+
+{% if user.role == 'supplier' %}
+    {% if order.status == 'pending' %}
+        <a href="{% url 'order_confirm' order.pk %}" class="bg-blue-600 text-white px-4 py-2 rounded">Confirm Order</a>
+    {% elif order.status == 'confirmed' %}
+        <a href="{% url 'order_ship' order.pk %}" class="bg-blue-600 text-white px-4 py-2 rounded">Mark Shipped</a>
+    {% endif %}
+{% elif user.role == 'buyer' %}
+    {% if order.status == 'confirmed' %}
+        <a href="{% url 'simulate_payment' order.pk %}" class="bg-green-600 text-white px-4 py-2 rounded">Pay Now (Simulated)</a>
+    {% elif order.status == 'shipped' %}
+        <a href="{% url 'order_deliver' order.pk %}" class="bg-blue-600 text-white px-4 py-2 rounded">Mark Received</a>
+    {% endif %}
+    <a href="{% url 'tracking' order.pk %}" class="text-blue-600 ml-2">Track Shipment</a>
+{% endif %}
+<a href="{% url 'invoice' order.pk %}" class="text-blue-600 ml-2">Download Invoice</a>
+{% endblock %}
